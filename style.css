@@ -82,14 +82,7 @@ button {
 }
 
 .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0;
-    text-decoration: none;
-    color: var(--color-text);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    justify-self: start;
 }
 
 .logo img {
@@ -135,18 +128,13 @@ button {
 }
 
 .nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+    display: contents
 }
 
 .nav-links{
     display: flex;
     gap:2rem; 
-    margin: 0 auto;
+    justify-content: center;
 }
 
 .nav a {
@@ -280,7 +268,6 @@ button {
     font-size: 1.1rem;
 }
 
-/* Hero – Dreelio: centered headline, sub, two CTAs, then big image */
 .hero {
     max-width: 1200px;
     margin: 0 auto;
@@ -799,7 +786,11 @@ button {
     margin: 0 1.25rem 1rem;
 }
 
-/* Final CTA */
+
+.cta-waitlist {
+    justify-self: end;
+}
+
 .cta-final {
     background: var(--color-primary);
     color: #ffffff;
