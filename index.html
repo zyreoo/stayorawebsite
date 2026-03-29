@@ -6,15 +6,15 @@
     <title>Stayora – Hotel Management for Modern Teams</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="load-wrap">
     <span id="top" class="page-top-anchor" aria-hidden="true"></span>
     <div class="header-sticky">
     <header class="header load-reveal">
-        <a href="#" class="logo logo-home" aria-label="Stayora – go to top">
-            <span class="logo-text">Stayora</span><span class="logo-dot" aria-hidden="true"></span>
+        <a href="#top" class="logo logo-home" aria-label="Stayora – go to top">
+            <img src= "public/Frame 2147236742.svg" alt="Stayora logo"/> 
         </a>
         <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
             <span class="nav-toggle-bar"></span>
@@ -22,12 +22,20 @@
             <span class="nav-toggle-bar"></span>
         </button>
         <nav class="nav" id="main-nav">
-            <a href="#features" class="nav-link">Features</a>
-            <a href="#benefits" class="nav-link">Benefits</a>
-            <a href="#pricing" class="nav-link">Pricing</a>
-            <a href="#blog" class="nav-link">Blog</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <a href="#waitlist" class="btn-primary btn-header cta-waitlist">Try Stayora free</a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#benefits" class="nav-link">Benefits</a>
+                <li class="nav-item resources-item">
+                    <button class="nav-link resources-btn" id="resourcesBtn">
+                        Resources
+                    </button>
+                    <div class="resources-panel" id="resourcesPanel">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </li>
+            </div>
+            <a href="#waitlist" class="btn-primary btn-header cta-waitlist">Waitlist</a>
         </nav>
     </header>
     </div>
@@ -62,7 +70,7 @@
             <a href="#waitlist" class="btn-primary cta-waitlist">Try Stayora free</a>
         </div>
         <div class="feature-row-media">
-            <img src="public/Group 1 (1).png" alt="Stayora dashboard" class="feature-row-image">
+            <img src="public/Group 33.png" alt="Stayora dashboard" class="feature-row-image">
         </div>
     </section>
 
@@ -230,8 +238,8 @@
 
     <footer class="footer reveal" id="contact">
         <div class="footer-brand">
-            <a href="#" class="logo logo-footer logo-home" aria-label="Stayora – go to top">
-                <span class="logo-text">Stayora</span><span class="logo-dot" aria-hidden="true"></span>
+            <a href="#top" class="logo logo-home" aria-label="Stayora – go to top">
+                <img src= "public/Frame 2147236742.svg" alt="Stayora logo"/> 
             </a>
             <p class="footer-tagline">Hotel management that actually fits how you work.</p>
         </div>

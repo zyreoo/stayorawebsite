@@ -1,10 +1,12 @@
 /* Stayora – Framer-style typography (Plus Jakarta Sans), warmer blue, human copy */
 
 :root {
-    --color-primary: #1a56db;
-    --color-primary-hover: #1648c4;
-    --color-text: #0f172a;
-    --color-text-muted: rgba(15, 23, 42, 0.7);
+    --color-primary: #0147FF;
+    --color-primary-hover: #013fe3;
+    --color-secondary: #383838;
+    --color-text: #383838;
+    --color-text-muted: rgba(56, 56, 56, 0.7);
+    --noncolor: #ffffff;
 }
 
 * {
@@ -27,10 +29,17 @@ html {
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     color: var(--color-text);
-    background: linear-gradient(165deg, #e0e7ff 0%, #c7d2fe 22%, #eef2ff 40%, #f5f3ff 60%, #ddd6fe 78%, #e0e7ff 100%);
+    background: linear-gradient(
+        165deg,
+        rgba(1, 71, 255, 0.14) 0%,
+        rgba(1, 71, 255, 0.10) 22%,
+        rgba(255, 255, 255, 1) 46%,
+        rgba(1, 71, 255, 0.07) 70%,
+        rgba(255, 255, 255, 1) 100%
+    );
     background-attachment: fixed;
     min-height: 100vh;
     line-height: 1.6;
@@ -58,17 +67,18 @@ button {
 }
 
 .header-sticky.is-scrolled {
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    border-bottom-color: rgba(56, 56, 56, 0.08);
+    box-shadow: 0 1px 0 rgba(56, 56, 56, 0.04);
 }
 
 .header {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
+
     max-width: 1200px;
     margin: 0 auto;
+    padding: 1rem 1.5rem;
 }
 
 .logo {
@@ -82,14 +92,10 @@ button {
     letter-spacing: -0.02em;
 }
 
-.logo-dot {
-    width: 8px;
-    height: 8px;
-    margin-left: 2px;
-    background: var(--color-primary);
-    border-radius: 50%;
-    flex-shrink: 0;
-    vertical-align: middle;
+.logo img {
+    height: 25px;
+    width: auto;
+    display: block;
 }
 
 /* Hamburger: hidden on desktop */
@@ -108,7 +114,7 @@ button {
     transition: background 0.2s;
 }
 .nav-toggle:hover {
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(56, 56, 56, 0.06);
 }
 .nav-toggle-bar {
     display: block;
@@ -129,9 +135,18 @@ button {
 }
 
 .nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    align-items: center;
     gap: 2rem;
+    align-items: center;
+}
+
+.nav-links{
+    display: flex;
+    gap:2rem; 
+    margin: 0 auto;
 }
 
 .nav a {
@@ -152,6 +167,31 @@ button {
     transition: opacity 0.4s ease-out, transform 0.4s ease-out, color 0.2s;
 }
 
+
+/* Navbar */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    background: #111;
+    padding: 15px;
+  }
+  
+  .nav-menu li {
+    position: relative;
+  }
+
+  .nav-links li {
+    list-style: none;
+}
+
+  
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+  }
+
 .load-wrap.loaded .nav .nav-link:nth-child(1) { transition-delay: 0.08s; }
 .load-wrap.loaded .nav .nav-link:nth-child(2) { transition-delay: 0.14s; }
 .load-wrap.loaded .nav .nav-link:nth-child(3) { transition-delay: 0.2s; }
@@ -170,7 +210,7 @@ button {
     padding: 0.75rem 1.5rem;
     background: var(--color-primary);
     color: #ffffff;
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.95rem;
     border: none;
@@ -187,16 +227,16 @@ button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     background: transparent;
-    color: #000000;
+    color: var(--color-text);
     font-weight: 700;
     font-size: 0.95rem;
-    border: 2px solid #000000;
+    border: 2px solid var(--color-text);
     border-radius: 999px;
     transition: background 0.2s, color 0.2s;
 }
 
 .btn-secondary:hover {
-    background: #000000;
+    background: var(--color-text);
     color: #ffffff;
 }
 
@@ -218,12 +258,12 @@ button {
 }
 
 .btn-header {
-    padding: 0.6rem 1.25rem !important;
-    font-size: 0.9rem !important;
+    margin-left: auto;
 }
 
 .nav .btn-primary {
     color: #ffffff;
+    margin-left: auto;
 }
 
 .nav .btn-primary:hover {
@@ -255,7 +295,7 @@ button {
 .hero h1 {
     font-size: clamp(2.25rem, 5vw, 3.5rem);
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     margin-bottom: 1.25rem;
     letter-spacing: -0.03em;
     line-height: 1.15;
@@ -264,7 +304,7 @@ button {
 .hero-sub {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(56, 56, 56, 0.75);
     max-width: 36rem;
     margin: 0 auto 1.75rem;
     line-height: 1.6;
@@ -280,7 +320,7 @@ button {
 .hero-image-wrap {
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 24px 60px rgba(56, 56, 56, 0.12);
 }
 
 .hero-image {
@@ -296,14 +336,14 @@ button {
     margin: 0 auto;
     padding: 2rem 1.5rem;
     text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid rgba(56, 56, 56, 0.08);
+    border-bottom: 1px solid rgba(56, 56, 56, 0.08);
 }
 
 .trust-bar p {
     font-size: 0.9rem;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(56, 56, 56, 0.6);
 }
 
 /* Feature rows – alternating image left / right (Dreelio style) */
@@ -338,7 +378,7 @@ button {
 .feature-row h2 {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
@@ -347,7 +387,7 @@ button {
 .feature-row p {
     font-size: 1rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(56, 56, 56, 0.75);
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
@@ -362,10 +402,10 @@ button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     font-weight: 600;
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(56, 56, 56, 0.06);
     border: none;
     border-radius: 999px;
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(56, 56, 56, 0.7);
     transition: background 0.2s, color 0.2s;
 }
 
@@ -375,7 +415,7 @@ button {
 }
 
 .tab:not(.active):hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(56, 56, 56, 0.1);
 }
 
 .feature-pills {
@@ -398,7 +438,7 @@ button {
 .feature-row-media {
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 50px rgba(56, 56, 56, 0.1);
 }
 
 .feature-row-image {
@@ -429,7 +469,7 @@ button {
 .section-title {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     text-align: center;
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -439,7 +479,7 @@ button {
 .features-sub {
     font-size: 1rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(56, 56, 56, 0.65);
     text-align: center;
     margin-bottom: 2.5rem;
 }
@@ -449,7 +489,7 @@ button {
     margin: 0 auto 2.5rem;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 50px rgba(56, 56, 56, 0.08);
 }
 
 .features-image {
@@ -469,14 +509,14 @@ button {
 .features-list-item h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     margin-bottom: 0.35rem;
 }
 
 .features-list-item p {
     font-size: 0.9rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(56, 56, 56, 0.7);
     line-height: 1.5;
 }
 
@@ -491,7 +531,7 @@ button {
 .testimonial-quote {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     font-style: normal;
     margin-bottom: 0.75rem;
     line-height: 1.3;
@@ -500,7 +540,7 @@ button {
 .testimonial-author {
     font-size: 0.95rem;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(56, 56, 56, 0.65);
     margin-bottom: 2.5rem;
 }
 
@@ -512,7 +552,7 @@ button {
 
 .testimonial-card {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(56, 56, 56, 0.08);
     border-radius: 12px;
     padding: 1.5rem;
     text-align: left;
@@ -520,13 +560,13 @@ button {
 }
 
 .testimonial-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 32px rgba(56, 56, 56, 0.08);
 }
 
 .testimonial-card p {
     font-size: 0.95rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(56, 56, 56, 0.8);
     margin-bottom: 1rem;
     line-height: 1.5;
 }
@@ -534,7 +574,7 @@ button {
 .card-author {
     font-size: 0.85rem !important;
     font-weight: 600 !important;
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: rgba(56, 56, 56, 0.6) !important;
     margin-bottom: 0 !important;
 }
 
@@ -543,7 +583,7 @@ button {
     max-width: 1200px;
     margin: 0 auto;
     padding: 5rem 1.5rem;
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(56, 56, 56, 0.02);
 }
 
 .pricing .section-title {
@@ -561,13 +601,13 @@ button {
 .toggle-label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(56, 56, 56, 0.6);
 }
 
 .toggle {
     width: 48px;
     height: 26px;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(56, 56, 56, 0.15);
     border: none;
     border-radius: 999px;
     position: relative;
@@ -582,7 +622,7 @@ button {
     height: 20px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(56, 56, 56, 0.2);
     transition: transform 0.25s ease;
 }
 
@@ -607,7 +647,7 @@ button {
 
 .pricing-card {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(56, 56, 56, 0.08);
     border-radius: 16px;
     padding: 2rem;
     position: relative;
@@ -615,7 +655,7 @@ button {
 }
 
 .pricing-card:hover {
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px rgba(56, 56, 56, 0.08);
 }
 
 .pricing-card-featured {
@@ -642,21 +682,21 @@ button {
 .pricing-card h3 {
     font-size: 1.15rem;
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     margin-bottom: 0.5rem;
 }
 
 .pricing-price {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     margin-bottom: 0.25rem;
 }
 
 .pricing-price s {
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(56, 56, 56, 0.5);
 }
 
 /* Pro plan: switch price by billing period */
@@ -678,7 +718,7 @@ button {
 .pricing-desc {
     font-size: 0.9rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(56, 56, 56, 0.65);
     margin-bottom: 1.5rem;
 }
 
@@ -690,9 +730,9 @@ button {
 .pricing-features li {
     font-size: 0.9rem;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(56, 56, 56, 0.8);
     padding: 0.35rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(56, 56, 56, 0.06);
 }
 
 .pricing-features li:last-child {
@@ -718,14 +758,14 @@ button {
 
 .blog-card {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(56, 56, 56, 0.08);
     border-radius: 12px;
     overflow: hidden;
     transition: box-shadow 0.2s;
 }
 
 .blog-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 32px rgba(56, 56, 56, 0.08);
 }
 
 .blog-card-image {
@@ -736,7 +776,7 @@ button {
 .blog-card h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     padding: 1rem 1.25rem 0.5rem;
     line-height: 1.3;
 }
@@ -744,7 +784,7 @@ button {
 .blog-card p {
     font-size: 0.9rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(56, 56, 56, 0.65);
     padding: 0 1.25rem 1rem;
     line-height: 1.5;
 }
@@ -811,7 +851,7 @@ button {
 .footer-tagline {
     font-size: 0.95rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(56, 56, 56, 0.65);
     max-width: 28rem;
     line-height: 1.5;
 }
@@ -832,7 +872,7 @@ button {
 .footer-col-title {
     font-size: 0.8rem;
     font-weight: 700;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(56, 56, 56, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin-bottom: 0.25rem;
@@ -841,7 +881,7 @@ button {
 .footer-col a {
     font-size: 0.9rem;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(56, 56, 56, 0.75);
     transition: color 0.2s;
 }
 
@@ -851,13 +891,13 @@ button {
 
 .footer-bottom {
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid rgba(56, 56, 56, 0.08);
 }
 
 .footer-copy {
     font-size: 0.85rem;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(56, 56, 56, 0.5);
 }
 
 /* ========== Load & scroll animations (Dreelio-style) ========== */
@@ -1044,7 +1084,7 @@ button {
         gap: 0;
         padding: 4.5rem 1.5rem 1.5rem;
         background: #ffffff;
-        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+        box-shadow: -4px 0 24px rgba(56, 56, 56, 0.12);
         z-index: 99;
         transform: translateX(100%);
         transition: transform 0.3s ease;
@@ -1058,7 +1098,7 @@ button {
     .nav a {
         padding: 0.75rem 0;
         font-size: 1rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 1px solid rgba(56, 56, 56, 0.06);
         min-height: 44px;
         display: flex;
         align-items: center;

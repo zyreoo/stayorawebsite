@@ -139,6 +139,22 @@
     initNav();
   }
 
+
+  const resourcesBtn = document.getElementById("resourcesBtn");
+  const resourcesPanel = document.getElementById("resourcesPanel");
+  
+  resourcesBtn.addEventListener("click", () => {
+      resourcesPanel.classList.toggle("open");
+      resourcesBtn.classList.toggle("active");
+  });
+  
+  document.addEventListener("click", (e) => {
+      if (!resourcesBtn.contains(e.target) && !resourcesPanel.contains(e.target)) {
+          resourcesPanel.classList.remove("open");
+          resourcesBtn.classList.remove("active");
+      }
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run);
   } else {
