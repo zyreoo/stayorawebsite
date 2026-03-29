@@ -83,15 +83,25 @@ button {
 
 .logo {
     justify-self: start;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .logo img {
-    height: 25px;
+    height: 28px;
     width: auto;
     display: block;
+    object-fit: contain;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Hamburger: hidden on desktop */
+
+.logo img:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -148,15 +158,13 @@ button {
     color: var(--color-text);
 }
 
-/* Nav link stagger on load */
+
 .nav .nav-link {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.4s ease-out, transform 0.4s ease-out, color 0.2s;
 }
 
-
-/* Navbar */
 .nav-menu {
     list-style: none;
     display: flex;
