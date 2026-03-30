@@ -165,7 +165,15 @@
       d.setHours(0, 0, 0, 0);
       return d;
     }
-  
+    
+    function animateCalendarRefresh() {
+      layer.style.opacity = '0.75';
+      setTimeout(function () {
+        renderAll();
+        layer.style.opacity = '1';
+      }, 120);
+    }
+
     function addDays(date, days) {
       var d = new Date(date);
       d.setDate(d.getDate() + days);
@@ -242,15 +250,17 @@
           '<span class=\"booking-guest\">' + booking.guest + '</span>' +
           '<span class=\"booking-meta\">' + booking.nights + ' night' + (booking.nights > 1 ? 's' : '') + '</span>';
   
-        bar.addEventListener('dragstart', function (e) {
-          dragBookingId = booking.id;
-          e.dataTransfer.setData('text/plain', booking.id);
-        });
+          bar.addEventListener('dragstart', function (e) {
+            dragBookingId = booking.id;
+            bar.classList.add('is-dragging');
+            e.dataTransfer.setData('text/plain', booking.id);
+          });
   
-        bar.addEventListener('dragend', function () {
-          dragBookingId = null;
-          clearDragStates();
-        });
+          bar.addEventListener('dragend', function () {
+            dragBookingId = null;
+            bar.classList.remove('is-dragging');
+            clearDragStates();
+          });
   
         layer.appendChild(bar);
       });
@@ -290,8 +300,18 @@
   
         booking.room = cell.dataset.room;
         booking.startDay = Number(cell.dataset.day);
-  
+
         renderAll();
+
+        setTimeout(function () {
+        var movedBar = layer.querySelector('[data-booking-id="' + booking.id + '"]');
+        if (!movedBar) return;
+
+        movedBar.style.transform = 'scale(1.02)';
+        setTimeout(function () {
+          movedBar.style.transform = '';
+        }, 160);
+        }, 20);
       });
     }
   
@@ -303,21 +323,21 @@
     if (prevBtn) {
       prevBtn.addEventListener('click', function () {
         currentStart = addDays(currentStart, -7);
-        renderAll();
+        animateCalendarRefresh();
       });
     }
-  
+    
     if (nextBtn) {
       nextBtn.addEventListener('click', function () {
         currentStart = addDays(currentStart, 7);
-        renderAll();
+        animateCalendarRefresh();
       });
     }
-  
+    
     if (todayBtn) {
       todayBtn.addEventListener('click', function () {
         currentStart = startOfWeek(new Date());
-        renderAll();
+        animateCalendarRefresh();
       });
     }
   
