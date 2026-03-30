@@ -25,234 +25,52 @@
             <div class="nav-links">
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#benefits" class="nav-link">Benefits</a>
-                <a href="mailto:simone.marton89@gmail.com" class="nav-link">Contact</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <a href="#waitlist" class="btn-primary btn-header cta-waitlist">Waitlist</a>
         </nav>
     </header>
     </div>
 
-    <section class="hero">
+    <section class="hero hero-with-demo">
         <div class="hero-inner load-reveal">
             <h1>Your hotel isn't the problem</h1>
             <h1>Your system is</h1>
-            <p class="hero-sub">Stop overbookings, missed reservations, and chaos at the front desk. Stayora manages your entire hotel in one place.</p>
+    
+            <p class="hero-sub">
+                Stop overbookings, missed reservations, and chaos at the front desk.
+                Stayora manages your entire hotel in one place.
+            </p>
+    
             <div class="hero-ctas">
                 <a href="#waitlist" class="btn-primary cta-waitlist">Try Stayora free</a>
                 <a href="#features" class="btn-secondary">See features</a>
             </div>
         </div>
-    </section>
-    <section class="calendar-demo reveal" id="calendar-demo">
-        <div class="calendar-demo-copy">
-            <h2 class="section-title">Drag. Drop. Done.</h2>
-            <p class="features-sub">
-                Move reservations, update rooms, and keep stays on track in seconds.
-            </p>
-        </div>
-        <div class="calendar-demo-shell">
-            <div class="calendar-demo-topbar">
-                <div class="calendar-demo-title">
-                    <strong>Calendar</strong>
-                    <span>Demo mode</span>
+    
+        <div class="hero-demo reveal">
+            <div class="calendar-demo-shell">
+                
+                <div class="calendar-demo-topbar">
+                    <div class="calendar-demo-title">
+                        <strong>Calendar</strong>
+                        <span>Demo mode</span>
+                    </div>
                 </div>
     
-                <div class="calendar-demo-actions">
-                    <button type="button" class="calendar-demo-btn" id="calendarPrev">←</button>
-                    <button type="button" class="calendar-demo-btn" id="calendarToday">Today</button>
-                    <button type="button" class="calendar-demo-btn" id="calendarNext">→</button>
+                <div class="calendar-board-wrap">
+                    <div class="calendar-board" id="calendarBoard">
+                        <div class="calendar-grid" id="calendarGrid"></div>
+                        <div class="calendar-bookings-layer" id="calendarBookingsLayer"></div>
+                    </div>
+                </div>
+    
+                <div class="calendar-demo-legend">
+                    <span><i class="legend-dot confirmed"></i> Confirmed</span>
+                    <span><i class="legend-dot checkedin"></i> Checked in</span>
+                    <span><i class="legend-dot cleaning"></i> Cleaning</span>
                 </div>
             </div>
-    
-            <div class="calendar-board-wrap">
-                <div class="calendar-board" id="calendarBoard">
-                    <div class="calendar-grid" id="calendarGrid"></div>
-                    <div class="calendar-bookings-layer" id="calendarBookingsLayer"></div>
-                </div>
-            </div>
-    
-            <div class="calendar-demo-legend">
-                <span><i class="legend-dot confirmed"></i> Confirmed</span>
-                <span><i class="legend-dot checkedin"></i> Checked in</span>
-                <span><i class="legend-dot cleaning"></i> Cleaning</span>
-            </div>
-        </div>
-    </section>
-    
-
-    <section class="trust-bar reveal">
-        <p>Loved by small hotels that actually care.</p>
-    </section>
-
-    <section class="feature-row feature-row-1 reveal" id="features">
-        <div class="feature-row-content">
-            <span class="feature-row-label">Seamless across devices</span>
-            <h2>Work from anywhere,<br>stay in sync</h2>
-            <p>Same dashboard on desktop, tablet, or phone. Front desk, housekeeping, and managers see the same numbers—no more "who had the key?"</p>
-            <div class="feature-tabs">
-                <button type="button" class="tab active">Web App</button>
-                <button type="button" class="tab">Mobile</button>
-            </div>
-            <a href="#waitlist" class="btn-primary cta-waitlist">Try Stayora free</a>
-        </div>
-        <div class="feature-row-media">
-            <img src="public/Group 33.png" alt="Stayora dashboard" class="feature-row-image">
-        </div>
-    </section>
-
-    <section class="feature-row feature-row-2 reveal">
-        <div class="feature-row-media">
-            <img src="Rectangle 4.png" alt="Stayora bookings and rooms" class="feature-row-image">
-        </div>
-        <div class="feature-row-content">
-            <span class="feature-row-label">Booking management</span>
-            <h2>Keep every booking<br>moving forward</h2>
-            <p><strong>Plan, assign, and deliver</strong>—all in one place. With smart availability, housekeeping status, and real-time updates, you stay organized and guests stay confident.</p>
-            <ul class="feature-pills">
-                <li>Reservations</li>
-                <li>Room status</li>
-                <li>Check-in / out</li>
-                <li>Reports</li>
-            </ul>
-            <a href="#waitlist" class="btn-primary cta-waitlist">Try Stayora free</a>
-        </div>
-    </section>
-
-    <section class="feature-row feature-row-3 reveal">
-        <div class="feature-row-content">
-            <span class="feature-row-label">Insights & revenue</span>
-            <h2>Track occupancy,<br>get paid, stress less</h2>
-            <p><strong>Occupancy and revenue in one view.</strong> Adjust rates, compare periods, and export when you need to—without opening another tab.</p>
-            <ul class="feature-pills">
-                <li>Occupancy</li>
-                <li>Rates & revenue</li>
-                <li>Forecasting</li>
-                <li>Export</li>
-            </ul>
-            <a href="#waitlist" class="btn-primary cta-waitlist">Try Stayora free</a>
-        </div>
-        <div class="feature-row-media">
-            <img src="Rectangle 4.png" alt="Stayora insights" class="feature-row-image">
-        </div>
-    </section>
-
-    <section class="features-block reveal" id="benefits">
-        <span class="section-label">features</span>
-        <h2 class="section-title">Built for hotels,<br>powered by simplicity</h2>
-        <p class="features-sub">No bloat. Just what you need to run the front desk and keep rooms full.</p>
-        <div class="features-visual">
-            <img src="public/Group 1 (1).png" alt="Stayora interface" class="features-image">
-        </div>
-        <div class="features-list reveal-children">
-            <div class="features-list-item reveal-item">
-                <h4>One dashboard for everything</h4>
-                <p>Bookings, rooms, guests, and team—all in sync. No switching between spreadsheets or tools.</p>
-            </div>
-            <div class="features-list-item reveal-item">
-                <h4>Guest-first experience</h4>
-                <p>Clear check-in flows, room status, and communication so guests and staff stay on the same page.</p>
-            </div>
-            <div class="features-list-item reveal-item">
-                <h4>View things your way</h4>
-                <p>Calendar, list, or table views. Filter by date, room type, or status—whatever you need.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials reveal">
-        <blockquote class="testimonial-quote">"Stayora is by far the best hotel management tool we've ever used."</blockquote>
-        <p class="testimonial-author"><strong>Maria Santos</strong> — General Manager, Riverside Hotel</p>
-        <div class="testimonial-cards reveal-children">
-            <div class="testimonial-card reveal-item">
-                <p>"We used to juggle spreadsheets and sticky notes. Now everything lives in one place. Clean, fast, and built for real hotels."</p>
-                <p class="card-author"><strong>James Chen</strong><br>Owner, The Loft Inn</p>
-            </div>
-            <div class="testimonial-card reveal-item">
-                <p>"From first booking to final checkout, this platform just works. Our team and our guests are both happier."</p>
-                <p class="card-author"><strong>Elena Rossi</strong><br>Operations Lead, Bella Vista</p>
-            </div>
-            <div class="testimonial-card reveal-item">
-                <p>"Finally, a tool that matches how we think: rooms, dates, and people. No clutter, no learning curve."</p>
-                <p class="card-author"><strong>David Okonkwo</strong><br>Front Desk Manager</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="pricing pricing-monthly reveal" id="pricing">
-        <span class="section-label">pricing</span>
-        <h2 class="section-title">Simple plans<br>for serious hotels</h2>
-        <div class="pricing-toggle" role="group" aria-label="Billing period">
-            <span class="toggle-label" data-period="annual">Annually</span>
-            <button type="button" class="toggle toggle-billing" aria-label="Toggle billing period"><span class="toggle-knob"></span></button>
-            <span class="toggle-label" data-period="monthly">Monthly</span>
-        </div>
-        <div class="pricing-grid reveal-children">
-            <div class="pricing-card reveal-item">
-                <h3>Stayora Starter</h3>
-                <p class="pricing-price">Free</p>
-                <p class="pricing-desc">For small properties getting started.</p>
-                <ul class="pricing-features">
-                    <li>Unlimited bookings</li>
-                    <li>Up to 10 rooms</li>
-                    <li>Basic reports</li>
-                    <li>Web app</li>
-                </ul>
-                <a href="#waitlist" class="btn-primary btn-block cta-waitlist">Try free</a>
-            </div>
-            <div class="pricing-card pricing-card-featured reveal-item">
-                <span class="badge">Save 20%</span>
-                <h3>Stayora Pro</h3>
-                <p class="pricing-price pricing-price-pro">
-                    <span class="price-annual">$948/yr <small>($79/mo)</small></span>
-                    <span class="price-monthly"><s>$99/mo</s> $79/mo</span>
-                </p>
-                <p class="pricing-desc">For growing hotels that need more.</p>
-                <ul class="pricing-features">
-                    <li>Everything in Starter</li>
-                    <li>Unlimited rooms</li>
-                    <li>Advanced reports</li>
-                    <li>Team & roles</li>
-                    <li>Priority support</li>
-                </ul>
-                <a href="#waitlist" class="btn-primary btn-block cta-waitlist">Get started</a>
-            </div>
-            <div class="pricing-card reveal-item">
-                <h3>Stayora Enterprise</h3>
-                <p class="pricing-price">Custom</p>
-                <p class="pricing-desc">For groups and multi-property.</p>
-                <ul class="pricing-features">
-                    <li>Everything in Pro</li>
-                    <li>Multiple properties</li>
-                    <li>API & integrations</li>
-                    <li>Dedicated support</li>
-                </ul>
-                <a href="mailto:hello@stayora.com?subject=Stayora%20Enterprise%20inquiry" class="btn-outline btn-block cta-contact-sales">Contact sales</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="blog-preview reveal" id="blog">
-        <span class="section-label">blog</span>
-        <h2 class="section-title">Ideas to level-up<br>your hotel game</h2>
-        <div class="blog-grid reveal-children">
-            <a href="#blog" class="blog-card reveal-item">
-                <div class="blog-card-image"></div>
-                <h4>How to streamline check-in in 2025</h4>
-                <p>Practical tips to reduce wait time and keep guests happy.</p>
-                <span class="blog-category">Operations</span>
-            </a>
-            <a href="#blog" class="blog-card reveal-item">
-                <div class="blog-card-image"></div>
-                <h4>Top hotel management software compared</h4>
-                <p>What to look for when choosing a platform.</p>
-                <span class="blog-category">Guides</span>
-            </a>
-            <a href="#blog" class="blog-card reveal-item">
-                <div class="blog-card-image"></div>
-                <h4>Occupancy and pricing strategies</h4>
-                <p>Use data to fill more rooms without leaving money on the table.</p>
-                <span class="blog-category">Revenue</span>
-            </a>
         </div>
     </section>
 
