@@ -56,7 +56,6 @@ button {
     cursor: pointer;
 }
 
-/* Header – sticky bar full width, content centered */
 .header-sticky {
     position: sticky;
     top: 0;
@@ -184,7 +183,6 @@ button {
   
   .nav-link {
     text-decoration: none;
-    color: white;
     font-weight: 500;
   }
 
@@ -919,12 +917,11 @@ button {
     transform: translateY(0);
 }
 
-/* Hero image appears after the text block (Dreelio-style stagger) */
 .hero .load-delay {
     transition-delay: 0.25s;
 }
 
-/* Scroll reveal: sections animate in when they enter viewport */
+
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -936,13 +933,12 @@ button {
     transform: translateY(0);
 }
 
-/* Alternating slide direction for feature rows */
+
 .feature-row-2.reveal { transform: translateY(40px) translateX(20px); }
 .feature-row-2.reveal.in-view { transform: translateY(0) translateX(0); }
 .feature-row-3.reveal { transform: translateY(40px) translateX(-20px); }
 .feature-row-3.reveal.in-view { transform: translateY(0) translateX(0); }
 
-/* Staggered children: items animate when parent .reveal gets .in-view */
 .reveal-children .reveal-item {
     opacity: 0;
     transform: translateY(28px);
@@ -960,7 +956,7 @@ button {
     transform: translateY(0);
 }
 
-/* ========== Tablet (max-width: 1024px) ========== */
+
 @media (max-width: 1024px) {
     .header {
         padding: 0.875rem 1.25rem;
@@ -976,7 +972,7 @@ button {
 
     .hero {
         padding: 3rem 1.25rem 4rem;
-    }
+        }
 
     .hero h1 {
         font-size: clamp(1.75rem, 5vw, 2.5rem);
@@ -995,16 +991,16 @@ button {
     }
 
     .feature-row {
-        padding: 3.5rem 1.25rem;
-        gap: 2.5rem;
-    }
+            padding: 3.5rem 1.25rem;
+            gap: 2.5rem;
+     }
 
-    .features-block,
-    .testimonials,
-    .pricing,
-    .blog-preview {
-        padding: 3.5rem 1.25rem;
-    }
+     .features-block,
+     .testimonials,
+     .pricing,
+     .blog-preview {
+         padding: 3.5rem 1.25rem;
+     }
 
     .cta-final {
         padding: 3rem 1.25rem;
@@ -1200,26 +1196,26 @@ button {
     }
 }
 
-/* ========== Small mobile (max-width: 480px) ========== */
+
 @media (max-width: 480px) {
     .header {
-        padding: 0.625rem 0.875rem;
-    }
-
-    .logo {
-        font-size: 1.2rem;
+        padding: 0.6rem 0.8rem;
     }
 
     .hero {
-        padding: 2rem 0.875rem 3rem;
+        padding: 2rem 0.8rem 2.5rem;
     }
 
     .hero h1 {
         font-size: 1.5rem;
     }
 
+    .hero-sub {
+        font-size: 0.9rem;
+    }
+
     .trust-bar {
-        padding: 1.25rem 0.875rem;
+        padding: 1.2rem 0.8rem;
     }
 
     .feature-row,
@@ -1227,15 +1223,19 @@ button {
     .testimonials,
     .pricing,
     .blog-preview {
-        padding: 2rem 0.875rem;
+        padding: 2rem 0.8rem;
     }
 
     .testimonial-quote {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
 
     .blog-card-image {
         height: 140px;
+    }
+
+    .pricing-card {
+        padding: 1.25rem;
     }
 }
 
