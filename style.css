@@ -278,7 +278,7 @@ button {
 
 .hero-demo {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1060px;
     margin-top: 2rem;
 }
 
@@ -632,22 +632,22 @@ button {
 }
 
 .calendar-board-wrap {
-    overflow-x: auto;
+    overflow-x: visible;
     padding: 1rem;
 }
 
 .calendar-board {
     position: relative;
-    min-width: 760px;
+    width: 100%;
 }
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: 110px repeat(4, 140px);
-    grid-auto-rows: 72px;
+    grid-template-columns: minmax(110px, 1.05fr) repeat(4, minmax(0, 1fr));
+    grid-auto-rows: clamp(62px, 6vw, 78px);
     gap: 1px;
-    background: rgba(56, 56, 56, 0.08);
-    border: 1px solid rgba(56, 56, 56, 0.08);
+    background: rgba(56, 56, 56, 0.03);
+    border: 1px solid rgba(56, 56, 56, 0.03);
     border-radius: 18px;
     overflow: hidden;
 }
@@ -659,7 +659,7 @@ button {
 
 .calendar-cell.header {
     min-height: 58px;
-    background: rgba(1, 71, 255, 0.04);
+    background: rgba(56, 56, 56, 0.03);
     font-size: 0.85rem;
     font-weight: 700;
     display: flex;
@@ -844,6 +844,7 @@ button {
 .footer-col {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -870,6 +871,8 @@ button {
 .footer-bottom {
     padding-top: 1.5rem;
     border-top: 1px solid rgba(56, 56, 56, 0.08);
+    width: 100%;
+    max-width: 36rem;
 }
 
 .footer-copy {
@@ -1026,8 +1029,13 @@ button {
         padding: 1.2rem;
     }
 
+    .calendar-board-wrap {
+        overflow-x: auto;
+    }
+
     .calendar-board {
         min-width: 700px;
+        width: auto;
     }
 
     .calendar-grid {

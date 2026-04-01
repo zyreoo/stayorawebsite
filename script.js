@@ -137,13 +137,8 @@
   
     if (!grid || !layer) return;
   
-    var DAY_LABEL_WIDTH = 110;
-    var ROOM_WIDTH = 140;
-    var HEADER_HEIGHT = 72;
-    var ROW_HEIGHT = 72;
     var BAR_OFFSET_X = 8;
     var BAR_OFFSET_Y = 6;
-    var BAR_WIDTH = ROOM_WIDTH - 16;
   
     var rooms = ['101', '102', '103', '104'];
     var visibleDays = 7;
@@ -193,7 +188,8 @@
   
       var corner = document.createElement('div');
       corner.className = 'calendar-cell header';
-      corner.textContent = 'Dates';
+      corner.textContent = '';
+      corner.setAttribute('aria-label', 'Date labels');
       grid.appendChild(corner);
   
       rooms.forEach(function (room) {
@@ -222,11 +218,11 @@
   
     function renderBookings() {
       layer.innerHTML = '';
+
+      var gridWidth = grid.offsetWidth;
+      var gridHeight = grid.offsetHeight;
   
       bookings.forEach(function (booking) {
-        var roomIndex = rooms.indexOf(booking.room);
-        if (roomIndex === -1) return;
-  
         if (booking.startDay >= visibleDays) return;
         if (booking.startDay + booking.nights <= 0) return;
   
@@ -235,16 +231,26 @@
         var visibleSpan = clampedEnd - clampedStart;
   
         if (visibleSpan <= 0) return;
+
+        var startCell = grid.querySelector('.dropzone[data-room="' + booking.room + '"][data-day="' + clampedStart + '"]');
+        var endCell = grid.querySelector('.dropzone[data-room="' + booking.room + '"][data-day="' + (clampedEnd - 1) + '"]');
+        if (!startCell || !endCell) return;
   
         var bar = document.createElement('div');
         bar.className = 'booking-bar ' + booking.status;
+        bar.classList.add('room-' + booking.room);
         bar.draggable = true;
         bar.dataset.bookingId = booking.id;
   
-        bar.style.left = (DAY_LABEL_WIDTH + roomIndex * ROOM_WIDTH + BAR_OFFSET_X) + 'px';
-        bar.style.top = (HEADER_HEIGHT + clampedStart * ROW_HEIGHT + BAR_OFFSET_Y) + 'px';
-        bar.style.width = BAR_WIDTH + 'px';
-        bar.style.height = (visibleSpan * ROW_HEIGHT - 12) + 'px';
+        var top = startCell.offsetTop + BAR_OFFSET_Y;
+        var left = startCell.offsetLeft + BAR_OFFSET_X;
+        var width = Math.max(0, startCell.offsetWidth - BAR_OFFSET_X * 2);
+        var height = Math.max(0, (endCell.offsetTop + endCell.offsetHeight) - startCell.offsetTop - BAR_OFFSET_Y * 2);
+
+        bar.style.left = left + 'px';
+        bar.style.top = top + 'px';
+        bar.style.width = width + 'px';
+        bar.style.height = height + 'px';
   
         bar.innerHTML =
           '<span class=\"booking-guest\">' + booking.guest + '</span>' +
@@ -265,8 +271,8 @@
         layer.appendChild(bar);
       });
   
-      layer.style.width = (DAY_LABEL_WIDTH + rooms.length * ROOM_WIDTH) + 'px';
-      layer.style.height = (HEADER_HEIGHT + visibleDays * ROW_HEIGHT) + 'px';
+      layer.style.width = gridWidth + 'px';
+      layer.style.height = gridHeight + 'px';
     }
   
     function clearDragStates() {
@@ -340,6 +346,8 @@
         animateCalendarRefresh();
       });
     }
+
+    window.addEventListener('resize', renderAll);
   
     renderAll();
   }
