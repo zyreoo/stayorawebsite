@@ -1,4 +1,4 @@
-/* Stayora landing page: current HTML/JS-only styles */
+
 
 :root {
     --color-primary: #0147ff;
@@ -103,45 +103,6 @@ button {
 .logo img:hover {
     transform: scale(1.03);
     opacity: 0.9;
-}
-
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    background: none;
-    border: none;
-    border-radius: 8px;
-    transition: background 0.2s;
-}
-
-.nav-toggle:hover {
-    background: rgba(56, 56, 56, 0.06);
-}
-
-.nav-toggle-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--color-text);
-    border-radius: 1px;
-    transition: transform 0.25s, opacity 0.25s;
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
-    opacity: 0;
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
 }
 
 .nav {
@@ -687,6 +648,14 @@ button {
         inset 0 0 24px rgba(1, 71, 255, 0.08);
 }
 
+.calendar-cell.dropzone.drag-over-invalid {
+    cursor: not-allowed;
+    background: rgba(220, 38, 38, 0.08);
+    box-shadow:
+        inset 0 0 0 2px rgba(220, 38, 38, 0.28),
+        inset 0 0 20px rgba(220, 38, 38, 0.06);
+}
+
 .calendar-bookings-layer {
     position: absolute;
     inset: 0;
@@ -881,13 +850,32 @@ button {
     color: rgba(56, 56, 56, 0.5);
 }
 
+/* ── Tablet (≤ 1024px) ─────────────────────────────── */
 @media (max-width: 1024px) {
+    /* Simple bar: logo + Waitlist only (nav links hidden) */
     .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
         padding: 0.875rem 1.25rem;
     }
 
-    .nav a {
-        font-size: 0.9rem;
+    .nav-links {
+        display: none;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-shrink: 0;
+    }
+
+    .nav .btn-primary {
+        margin: 0;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.88rem;
     }
 
     .hero {
@@ -902,9 +890,40 @@ button {
         font-size: 1rem;
     }
 
-    .why-section,
-    .how-section,
-    .contact-section,
+    .why-section {
+        padding: 3rem 1.25rem 3.5rem;
+    }
+
+    .why-inner {
+        padding-top: 3rem;
+    }
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .why-item {
+        min-height: 200px;
+    }
+
+    .how-section {
+        padding: 4rem 1.25rem 3.5rem;
+    }
+
+    .how-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .how-step {
+        min-height: 200px;
+    }
+
+    .contact-section {
+        padding: 3rem 1.25rem 3.5rem;
+    }
+
     .cta-final {
         padding: 3rem 1.25rem;
     }
@@ -918,59 +937,23 @@ button {
     }
 }
 
+/* ── Mobile (≤ 768px) ──────────────────────────────── */
 @media (max-width: 768px) {
-    .nav-toggle {
-        display: flex;
-    }
-
-    .nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: min(320px, 85vw);
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 0;
-        padding: 4.5rem 1.5rem 1.5rem;
-        background: #fff;
-        box-shadow: -4px 0 24px rgba(56, 56, 56, 0.12);
-        z-index: 99;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        overflow-y: auto;
-    }
-
-    .nav.is-open {
-        transform: translateX(0);
-    }
-
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .nav a {
-        padding: 0.75rem 0;
-        font-size: 1rem;
-        border-bottom: 1px solid rgba(56, 56, 56, 0.06);
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-    }
-
-    .nav .btn-primary {
-        margin-top: 0.5rem;
-        justify-content: center;
-        min-height: 48px;
-    }
-
     .header {
         padding: 0.75rem 1rem;
     }
 
+    .logo img {
+        height: 26px;
+    }
+
+    .nav .btn-primary {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.85rem;
+        min-height: 44px;
+    }
+
+    /* hero */
     .hero {
         padding: 2.5rem 1rem 3rem;
     }
@@ -1000,11 +983,13 @@ button {
         min-height: 48px;
     }
 
+    /* features / why */
     .why-section {
         padding: 2.5rem 1rem 3rem;
     }
 
     .why-inner {
+        padding-top: 1.5rem;
         text-align: left;
     }
 
@@ -1013,22 +998,56 @@ button {
         gap: 1.25rem;
     }
 
+    .why-item {
+        min-height: auto;
+        padding: 1.75rem 1.5rem;
+    }
+
+    /* how it works */
     .how-section {
-        padding: 2rem 1rem 3rem;
+        padding: 2.5rem 1rem 3rem;
     }
 
     .how-steps {
         grid-template-columns: 1fr;
+        gap: 1.25rem;
     }
 
+    .how-step {
+        min-height: auto;
+        padding: 1.75rem 1.5rem;
+    }
+
+    /* CTA */
+    .cta-final {
+        padding: 3rem 1rem;
+    }
+
+    .cta-final h2 {
+        font-size: 1.5rem;
+    }
+
+    .cta-final .btn-primary {
+        width: 100%;
+        max-width: 22rem;
+        text-align: center;
+    }
+
+    /* contact */
     .contact-section {
-        padding: 2rem 1rem 3rem;
+        padding: 2.5rem 1rem 3rem;
     }
 
     .contact-form {
         padding: 1.2rem;
     }
 
+    .contact-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* calendar */
     .calendar-board-wrap {
         overflow-x: auto;
     }
@@ -1043,32 +1062,41 @@ button {
         grid-auto-rows: 68px;
     }
 
-    .cta-final {
-        padding: 2.5rem 1rem;
-    }
-
-    .cta-final h2 {
-        font-size: 1.5rem;
-    }
-
+    /* footer */
     .footer {
-        padding: 2rem 1rem 1.5rem;
+        padding: 2.5rem 1rem 1.5rem;
     }
 
     .footer-links {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
+        align-items: center;
+        gap: 1.75rem;
+    }
+
+    .footer-col {
+        align-items: center;
     }
 }
 
+/* ── Small mobile (≤ 480px) ────────────────────────── */
 @media (max-width: 480px) {
     .header {
-        padding: 0.6rem 0.8rem;
+        padding: 0.6rem 0.875rem;
     }
 
+    .logo img {
+        height: 24px;
+    }
+
+    .nav .btn-primary {
+        padding: 0.55rem 1rem;
+        font-size: 0.8rem;
+        min-height: 42px;
+    }
+
+    /* hero */
     .hero {
-        padding: 2rem 0.8rem 2.25rem;
+        padding: 2rem 0.875rem 2.5rem;
     }
 
     .hero h1 {
@@ -1079,16 +1107,77 @@ button {
         font-size: 0.9rem;
     }
 
+    /* features / why */
     .why-section {
-        padding: 2.25rem 0.8rem 2.5rem;
+        padding: 2rem 0.875rem 2.5rem;
     }
 
+    .why-item {
+        padding: 1.4rem 1.25rem;
+    }
+
+    .why-item h3 {
+        font-size: 1.05rem;
+    }
+
+    /* how it works */
     .how-section {
-        padding: 1.75rem 0.8rem 2.5rem;
+        padding: 2rem 0.875rem 2.5rem;
     }
 
+    .how-step {
+        padding: 1.4rem 1.25rem;
+    }
+
+    .how-step h3 {
+        font-size: 1.05rem;
+    }
+
+    /* CTA */
+    .cta-final {
+        padding: 2.5rem 0.875rem;
+    }
+
+    .cta-final h2 {
+        font-size: 1.35rem;
+    }
+
+    .cta-final p {
+        font-size: 0.95rem;
+    }
+
+    .cta-final .btn-primary {
+        max-width: 100%;
+        padding: 0.9rem 1.5rem;
+    }
+
+    /* contact */
     .contact-section {
-        padding: 1.75rem 0.8rem 2.5rem;
+        padding: 2rem 0.875rem 2.5rem;
+    }
+
+    .contact-form {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .contact-input,
+    .contact-textarea {
+        font-size: 0.95rem;
+        padding: 0.8rem 0.9rem;
+    }
+
+    /* footer */
+    .footer {
+        padding: 2rem 0.875rem 1.25rem;
+    }
+
+    .footer-tagline {
+        font-size: 0.9rem;
+    }
+
+    .footer-links {
+        gap: 1.5rem;
     }
 }
 

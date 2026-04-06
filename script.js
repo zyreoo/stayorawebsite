@@ -72,35 +72,6 @@
     section.classList.remove('pricing-annual');
   }
 
-  // -------- Mobile nav: hamburger toggle --------
-  function initNavToggle() {
-    var toggle = document.querySelector('.nav-toggle');
-    var nav = document.getElementById('main-nav');
-    if (!toggle || !nav) return;
-
-    function open() {
-      nav.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Close menu');
-    }
-    function close() {
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open menu');
-    }
-
-    toggle.addEventListener('click', function () {
-      if (nav.classList.contains('is-open')) close();
-      else open();
-    });
-
-    nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        close();
-      });
-    });
-  }
-
   // -------- Nav: logo → top of page, anchor links → smooth scroll (native, like Framer) --------
   function initNav() {
     function scrollToTop(e) {
@@ -275,25 +246,59 @@
       layer.style.height = gridHeight + 'px';
     }
   
+    /** True if [startDay, startDay + nights) overlaps another booking in the same room (excluding ignoreId). */
+    function bookingWouldOverlap(ignoreId, room, startDay, nights) {
+      var newEnd = startDay + nights;
+      for (var i = 0; i < bookings.length; i++) {
+        var o = bookings[i];
+        if (o.id === ignoreId) continue;
+        if (o.room !== room) continue;
+        var oEnd = o.startDay + o.nights;
+        if (startDay < oEnd && o.startDay < newEnd) return true;
+      }
+      return false;
+    }
+
     function clearDragStates() {
-      grid.querySelectorAll('.dropzone.drag-over').forEach(function (cell) {
-        cell.classList.remove('drag-over');
+      grid.querySelectorAll('.dropzone.drag-over, .dropzone.drag-over-invalid').forEach(function (cell) {
+        cell.classList.remove('drag-over', 'drag-over-invalid');
       });
     }
   
     function attachDropEvents(cell) {
       cell.addEventListener('dragover', function (e) {
         e.preventDefault();
-        cell.classList.add('drag-over');
+        var dragged = dragBookingId
+          ? bookings.find(function (item) {
+              return item.id === dragBookingId;
+            })
+          : null;
+        if (!dragged) {
+          cell.classList.remove('drag-over-invalid');
+          cell.classList.add('drag-over');
+          return;
+        }
+        var room = cell.dataset.room;
+        var day = Number(cell.dataset.day);
+        var invalid = bookingWouldOverlap(dragged.id, room, day, dragged.nights);
+        if (invalid) {
+          e.dataTransfer.dropEffect = 'none';
+          cell.classList.remove('drag-over');
+          cell.classList.add('drag-over-invalid');
+        } else {
+          e.dataTransfer.dropEffect = 'move';
+          cell.classList.remove('drag-over-invalid');
+          cell.classList.add('drag-over');
+        }
       });
   
       cell.addEventListener('dragleave', function () {
-        cell.classList.remove('drag-over');
+        cell.classList.remove('drag-over', 'drag-over-invalid');
       });
   
       cell.addEventListener('drop', function (e) {
         e.preventDefault();
-        cell.classList.remove('drag-over');
+        cell.classList.remove('drag-over', 'drag-over-invalid');
   
         var bookingId = e.dataTransfer.getData('text/plain') || dragBookingId;
         if (!bookingId) return;
@@ -303,9 +308,15 @@
         });
   
         if (!booking) return;
+
+        var targetRoom = cell.dataset.room;
+        var targetDay = Number(cell.dataset.day);
+        if (bookingWouldOverlap(booking.id, targetRoom, targetDay, booking.nights)) {
+          return;
+        }
   
-        booking.room = cell.dataset.room;
-        booking.startDay = Number(cell.dataset.day);
+        booking.room = targetRoom;
+        booking.startDay = targetDay;
 
         renderAll();
 
@@ -357,7 +368,6 @@
     initLoad();
     initReveal();
     initHeaderScroll();
-    initNavToggle();
     initTabs();
     initPricingToggle();
     initNav();
