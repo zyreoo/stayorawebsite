@@ -363,6 +363,55 @@
     renderAll();
   }
 
+  function initContactForm() {
+    var form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    var submitButton = form.querySelector('button[type="submit"]');
+    var statusEl = document.createElement('p');
+    statusEl.className = 'contact-form-status';
+    statusEl.setAttribute('aria-live', 'polite');
+    form.appendChild(statusEl);
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      var data = new FormData(form);
+      var payload = {
+        name: String(data.get('name') || '').trim(),
+        email: String(data.get('email') || '').trim(),
+        message: String(data.get('message') || '').trim()
+      };
+
+      if (!payload.name || !payload.email || !payload.message) {
+        statusEl.textContent = 'Please complete all fields.';
+        return;
+      }
+
+      if (submitButton) submitButton.disabled = true;
+      statusEl.textContent = 'Sending...';
+
+      try {
+        var response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error('Request failed with status ' + response.status);
+        }
+
+        form.reset();
+        statusEl.textContent = 'Message sent. We will get back to you soon.';
+      } catch (error) {
+        statusEl.textContent = 'Could not send message. Please try again later.';
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+  }
+
   // -------- Run on DOM ready --------
   function run() {
     initLoad();
@@ -372,6 +421,7 @@
     initPricingToggle();
     initNav();
     initCalendarDemo();
+    initContactForm();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run);
