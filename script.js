@@ -368,16 +368,27 @@
     if (!form) return;
 
     var submitButton = form.querySelector('button[type="submit"]');
+    var inquiryInput = form.querySelector('input[name="inquiryType"]');
+    var inquiryLinks = document.querySelectorAll('a[href="#contact"][data-inquiry]');
     var statusEl = document.createElement('p');
     statusEl.className = 'contact-form-status';
     statusEl.setAttribute('aria-live', 'polite');
     form.appendChild(statusEl);
+
+    inquiryLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (inquiryInput) {
+          inquiryInput.value = link.getAttribute('data-inquiry') || 'General contact';
+        }
+      });
+    });
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       var data = new FormData(form);
       var payload = {
+        inquiryType: String(data.get('inquiryType') || 'General contact').trim(),
         name: String(data.get('name') || '').trim(),
         email: String(data.get('email') || '').trim(),
         message: String(data.get('message') || '').trim()
@@ -385,6 +396,21 @@
 
       if (!payload.name || !payload.email || !payload.message) {
         statusEl.textContent = 'Please complete all fields.';
+        return;
+      }
+
+      if (window.location.protocol === 'file:') {
+        var mailtoSubject = encodeURIComponent('[' + payload.inquiryType + '] New message from ' + payload.name);
+        var mailtoBody = encodeURIComponent(
+          'Inquiry: ' + payload.inquiryType + '\n' +
+          'Name: ' + payload.name + '\n' +
+          'Email: ' + payload.email + '\n\n' +
+          payload.message
+        );
+        statusEl.innerHTML =
+          'Local file preview cannot call /api/contact. ' +
+          '<a href="mailto:simone.marton89@gmail.com?subject=' + mailtoSubject + '&body=' + mailtoBody + '">Send via email app</a> ' +
+          'or run the site on http/https.';
         return;
       }
 

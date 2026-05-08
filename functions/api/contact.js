@@ -1,6 +1,7 @@
 export async function onRequestPost(context) {
   try {
     const body = await context.request.json();
+    const inquiryType = (body.inquiryType || "General contact").trim();
     const name = (body.name || "").trim();
     const email = (body.email || "").trim();
     const message = (body.message || "").trim();
@@ -27,9 +28,10 @@ export async function onRequestPost(context) {
         from: fromEmail,
         to: [toEmail],
         reply_to: email,
-        subject: "New contact form message from " + name,
+        subject: "[" + inquiryType + "] New message from " + name,
         html:
           "<h2>New message from stayora.ro</h2>" +
+          "<p><strong>Inquiry:</strong> " + escapeHtml(inquiryType) + "</p>" +
           "<p><strong>Name:</strong> " + escapeHtml(name) + "</p>" +
           "<p><strong>Email:</strong> " + escapeHtml(email) + "</p>" +
           "<p><strong>Message:</strong></p>" +

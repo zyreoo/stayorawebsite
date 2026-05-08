@@ -204,7 +204,7 @@
                 <a href="#howItWorks" class="nav-link">How it works</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="faq.html" class="nav-link">FAQ</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="nav-link" data-inquiry="Contact">Contact</a>
             </div>
             <a href="#pricing" class="btn-primary btn-header">Start free trial</a>
         </nav>
@@ -222,7 +222,7 @@
     
             <div class="hero-ctas">
                 <a href="#pricing" class="btn-primary">Start free trial</a>
-                <a href="#contact" class="btn-secondary">Request a demo</a>
+                <a href="#contact" class="btn-secondary" data-inquiry="Demo request">Request a demo</a>
             </div>
         </div>
     
@@ -323,7 +323,7 @@
                         <li>Check-in &amp; check-out management</li>
                         <li>Email support</li>
                     </ul>
-                    <a href="#contact" class="btn-secondary pricing-btn">Start free trial</a>
+                    <a href="#contact" class="btn-secondary pricing-btn" data-inquiry="Offer: Starter free trial">Start free trial</a>
                 </div>
 
                 <div class="pricing-card pricing-card--featured">
@@ -343,7 +343,7 @@
                         <li>Analytics &amp; reports</li>
                         <li>Priority support</li>
                     </ul>
-                    <a href="#contact" class="btn-primary pricing-btn">Start free trial</a>
+                    <a href="#contact" class="btn-primary pricing-btn" data-inquiry="Offer: Pro free trial">Start free trial</a>
                 </div>
 
                 <div class="pricing-card">
@@ -360,7 +360,7 @@
                         <li>Dedicated account manager</li>
                         <li>Custom onboarding &amp; SLA</li>
                     </ul>
-                    <a href="#contact" class="btn-secondary pricing-btn">Request a demo</a>
+                    <a href="#contact" class="btn-secondary pricing-btn" data-inquiry="Offer: Enterprise demo">Request a demo</a>
                 </div>
 
             </div>
@@ -374,7 +374,7 @@
         <p>14-day free trial. No credit card required. Set up in minutes.</p>
         <div class="cta-buttons">
             <a href="#pricing" class="btn-primary btn-large">Start free trial</a>
-            <a href="#contact" class="btn-outline btn-large">Request a demo</a>
+            <a href="#contact" class="btn-outline btn-large" data-inquiry="Demo request">Request a demo</a>
         </div>
     </section>
 
@@ -388,6 +388,7 @@
             </p>
     
             <form class="contact-form">
+                <input type="hidden" name="inquiryType" value="General contact">
                 <div class="form-row">
                     <input class="contact-input" type="text" name="name" placeholder="Your name" required>
                 </div>
@@ -428,8 +429,8 @@
             </div>
             <div class="footer-col">
                 <span class="footer-col-title">Company</span>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Request a demo</a>
+                <a href="#contact" data-inquiry="Contact">Contact</a>
+                <a href="#contact" data-inquiry="Demo request">Request a demo</a>
             </div>
         </div>
         <div class="footer-bottom">
