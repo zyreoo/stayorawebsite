@@ -24,11 +24,23 @@
 </head>
 <body class="load-wrap waitlist-page">
 
-    <header class="waitlist-header load-reveal">
+    <div class="header-sticky">
+    <header class="header load-reveal">
         <a href="/" class="logo logo-home" aria-label="Stayora – go to homepage">
             <img src="../public/logo.svg" alt="Stayora logo">
         </a>
+        <nav class="nav" id="main-nav" aria-label="Main navigation">
+            <div class="nav-links">
+                <a href="/#features" class="nav-link">Features</a>
+                <a href="/#howItWorks" class="nav-link">How it works</a>
+                <a href="/waitlist/" class="nav-link nav-link--active">Waitlist</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="/waitlist/" class="btn-primary btn-header">Join waitlist</a>
+        </nav>
     </header>
+    </div>
 
     <main>
         <section class="waitlist-hero load-reveal">

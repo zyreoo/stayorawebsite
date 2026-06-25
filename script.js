@@ -423,6 +423,27 @@ var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxaCJ7AXcG6klC7lahk
     });
   }
 
+  // -------- Page transition: fade out on link click --------
+  function initPageTransitions() {
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('#')) return;
+      if (href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      if (href.startsWith('http') && !href.includes(window.location.hostname)) return;
+      if (link.target === '_blank') return;
+
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var dest = link.href;
+        document.body.classList.add('page-exit');
+        setTimeout(function () {
+          window.location.href = dest;
+        }, 220);
+      });
+    });
+  }
+
   // -------- Run on DOM ready --------
   function run() {
     initLoad();
@@ -433,6 +454,7 @@ var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxaCJ7AXcG6klC7lahk
     initNav();
     initCalendarDemo();
     initContactForm();
+    initPageTransitions();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run);
