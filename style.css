@@ -534,14 +534,16 @@ button {
 }
 
 .load-wrap .header.load-reveal,
-.load-wrap .hero .load-reveal {
+.load-wrap .hero .load-reveal,
+.load-wrap .page-hero.load-reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .load-wrap.loaded .header.load-reveal,
-.load-wrap.loaded .hero .load-reveal {
+.load-wrap.loaded .hero .load-reveal,
+.load-wrap.loaded .page-hero.load-reveal {
     opacity: 1;
     transform: translateY(0);
 }
@@ -609,9 +611,9 @@ button {
     display: grid;
     grid-template-columns: minmax(110px, 1.05fr) repeat(4, minmax(0, 1fr));
     grid-auto-rows: clamp(62px, 6vw, 78px);
-    gap: 1px;
-    background: rgba(56, 56, 56, 0.03);
-    border: 1px solid rgba(56, 56, 56, 0.03);
+    gap: 0;
+    background: #fff;
+    border: 1px solid rgba(56, 56, 56, 0.09);
     border-radius: 18px;
     overflow: hidden;
 }
@@ -619,11 +621,12 @@ button {
 .calendar-cell {
     background: #fff;
     position: relative;
+    border-bottom: 1px solid rgba(56, 56, 56, 0.07);
 }
 
 .calendar-cell.header {
     min-height: 58px;
-    background: rgba(56, 56, 56, 0.03);
+    background: #fff;
     font-size: 0.85rem;
     font-weight: 700;
     display: flex;
@@ -631,17 +634,21 @@ button {
     justify-content: center;
     text-align: center;
     padding: 0.5rem;
+    color: var(--color-primary);
+    border-bottom: 1px solid rgba(56, 56, 56, 0.1);
 }
 
 .calendar-cell.day-label {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(56, 56, 56, 0.03);
-    font-size: 0.95rem;
-    font-weight: 700;
+    background: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
     padding: 0.5rem;
     text-align: center;
+    color: var(--color-text-muted);
+    border-right: 1px solid rgba(56, 56, 56, 0.07);
 }
 
 .calendar-cell.dropzone.drag-over {
@@ -853,6 +860,208 @@ button {
     color: rgba(56, 56, 56, 0.5);
 }
 
+/* ── Waitlist page ───────────────────────────────────── */
+.waitlist-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.waitlist-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.waitlist-back {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    transition: color 0.2s;
+    letter-spacing: -0.01em;
+}
+
+.waitlist-back:hover {
+    color: var(--color-primary);
+}
+
+.waitlist-hero {
+    text-align: center;
+    padding: 3rem 1.5rem 2.5rem;
+    flex: 0 0 auto;
+}
+
+.waitlist-hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 580px;
+    margin: 0 auto 1.5rem;
+}
+
+.waitlist-hero h1 {
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--color-text);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.waitlist-hero p {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+.waitlist-form-section {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+    width: 100%;
+    flex: 1;
+}
+
+.waitlist-form-card {
+    background: #fff;
+    border: 1px solid rgba(56, 56, 56, 0.08);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(56, 56, 56, 0.07);
+    transition: opacity 0.3s ease;
+}
+
+.waitlist-form-card.is-hidden,
+.waitlist-hero.is-hidden {
+    display: none;
+}
+
+.form-row-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.contact-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23383838' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+.contact-select option[value=""][disabled] {
+    color: rgba(56, 56, 56, 0.5);
+}
+
+.waitlist-btn {
+    width: 100%;
+    font-size: 1rem;
+    min-height: 52px;
+    letter-spacing: -0.01em;
+}
+
+.waitlist-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.83rem;
+    color: rgba(56, 56, 56, 0.45);
+}
+
+.waitlist-status {
+    text-align: center;
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    min-height: 1.2em;
+}
+
+.waitlist-success {
+    display: none;
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.waitlist-success.is-visible {
+    display: block;
+}
+
+.waitlist-success-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(1, 71, 255, 0.08);
+    margin: 0 auto 1.5rem;
+    position: relative;
+}
+
+.waitlist-success-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%) rotate(45deg);
+    width: 10px;
+    height: 16px;
+    border-right: 2.5px solid var(--color-primary);
+    border-bottom: 2.5px solid var(--color-primary);
+}
+
+.waitlist-success h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin-bottom: 0.6rem;
+}
+
+.waitlist-success p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+}
+
+.waitlist-success-back {
+    display: inline-flex;
+}
+
+.waitlist-footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.83rem;
+    color: rgba(56, 56, 56, 0.4);
+    margin-top: auto;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .waitlist-header {
+        padding: 1.25rem 1.25rem;
+    }
+    .waitlist-hero {
+        padding: 2.5rem 1.25rem 2rem;
+    }
+    .form-row-split {
+        grid-template-columns: 1fr;
+    }
+    .waitlist-form-card {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
 /* ── Active nav link (current page) ─────────────────── */
 .nav-link--active {
     color: var(--color-primary) !important;
@@ -1034,6 +1243,15 @@ button {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.faq-item.reveal {
+    transform: translateY(16px);
+    transition:
+        opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
 .faq-item:hover {
     border-color: rgba(1, 71, 255, 0.16);
     box-shadow: 0 6px 20px rgba(56, 56, 56, 0.06);
@@ -1109,6 +1327,12 @@ button {
 .faq-answer {
     padding: 0 1.6rem 1.4rem;
     border-top: 1px solid rgba(56, 56, 56, 0.06);
+    animation: faqAnswerIn 0.28s ease-out;
+}
+
+@keyframes faqAnswerIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .faq-answer p {
@@ -1191,6 +1415,74 @@ button {
 .pricing-section.reveal.in-view .pricing-card:nth-child(1) { transition-delay: 0.08s; }
 .pricing-section.reveal.in-view .pricing-card:nth-child(2) { transition-delay: 0.16s; }
 .pricing-section.reveal.in-view .pricing-card:nth-child(3) { transition-delay: 0.24s; }
+
+.early-access-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    align-items: start;
+}
+
+.early-access-card {
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid rgba(56, 56, 56, 0.08);
+    padding: 2.25rem 2rem;
+    box-shadow: 0 10px 30px rgba(56, 56, 56, 0.04);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.early-access-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+}
+
+.early-access-card p {
+    font-size: 0.93rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+}
+
+.early-access-card:hover {
+    box-shadow: 0 20px 50px rgba(56, 56, 56, 0.1);
+    transform: translateY(-3px);
+    border-color: rgba(1, 71, 255, 0.14);
+}
+
+.early-access-card--featured {
+    border-color: rgba(1, 71, 255, 0.28);
+    box-shadow: 0 20px 55px rgba(1, 71, 255, 0.1);
+    padding-top: 2.75rem;
+}
+
+.early-access-card--featured:hover {
+    box-shadow: 0 28px 70px rgba(1, 71, 255, 0.18);
+    border-color: rgba(1, 71, 255, 0.4);
+    transform: translateY(-4px);
+}
+
+.pricing-section.reveal.in-view .early-access-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pricing-section.reveal.in-view .early-access-card:nth-child(1) { transition-delay: 0.08s; }
+.pricing-section.reveal.in-view .early-access-card:nth-child(2) { transition-delay: 0.16s; }
+.pricing-section.reveal.in-view .early-access-card:nth-child(3) { transition-delay: 0.24s; }
 
 .pricing-badge {
     position: absolute;
@@ -1417,6 +1709,19 @@ button {
         padding-top: 2.5rem;
     }
 
+    .early-access-grid {
+        gap: 1.25rem;
+        margin-top: 2.25rem;
+    }
+
+    .early-access-card {
+        padding: 2rem 1.75rem;
+    }
+
+    .early-access-card--featured {
+        padding-top: 2.5rem;
+    }
+
     .pricing-price {
         font-size: 2.2rem;
     }
@@ -1554,6 +1859,12 @@ button {
     }
 
     .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-top: 2rem;
+    }
+
+    .early-access-grid {
         grid-template-columns: 1fr;
         gap: 1.25rem;
         margin-top: 2rem;
@@ -1714,6 +2025,14 @@ button {
     }
 
     .pricing-card--featured {
+        padding-top: 2.25rem;
+    }
+
+    .early-access-card {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .early-access-card--featured {
         padding-top: 2.25rem;
     }
 

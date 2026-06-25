@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist – Stayora</title>
+    <meta name="description" content="Be among the first hotels to get access when Stayora launches. Join the waitlist now.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="canonical" href="https://www.stayora.ro/waitlist.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.stayora.ro/waitlist.html">
+    <meta property="og:site_name" content="Stayora">
+    <meta property="og:title" content="Join the Waitlist – Stayora">
+    <meta property="og:description" content="Be among the first hotels to get access when Stayora launches.">
+    <meta property="og:image" content="https://www.stayora.ro/public/og-image.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="public/iconWebPhoto.svg" type="image/svg+xml">
+</head>
+<body class="load-wrap waitlist-page">
+
+    <header class="waitlist-header load-reveal">
+        <a href="index.html" class="logo logo-home" aria-label="Stayora – go to homepage">
+            <img src="public/logo.svg" alt="Stayora logo">
+        </a>
+    </header>
+
+    <main>
+        <section class="waitlist-hero load-reveal">
+            <div class="waitlist-hero-top">
+                <a href="index.html" class="waitlist-back">← Home</a>
+                <span class="page-hero-kicker">Early access</span>
+            </div>
+            <h1>Join the waitlist.</h1>
+            <p>We'll reach out the moment Stayora opens its doors.</p>
+        </section>
+
+        <div class="waitlist-form-section">
+
+            <form class="waitlist-form-card" id="waitlistForm" novalidate>
+                <input type="hidden" name="inquiryType" value="Waitlist">
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+
+                <div class="form-row form-row-split">
+                    <input class="contact-input" type="text" name="name" placeholder="Your name" required autocomplete="name">
+                    <input class="contact-input" type="email" name="email" placeholder="Your email" required autocomplete="email">
+                </div>
+
+                <div class="form-row form-row-split">
+                    <select class="contact-input contact-select" name="propertyType">
+                        <option value="" disabled selected>Type of property</option>
+                        <option value="B&amp;B">B&amp;B</option>
+                        <option value="Guesthouse">Guesthouse</option>
+                        <option value="Boutique hotel">Boutique hotel</option>
+                        <option value="Small hotel">Small hotel</option>
+                        <option value="Hotel group">Hotel group</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input class="contact-input" type="number" name="rooms" placeholder="Number of rooms" min="1" max="9999">
+                </div>
+
+                <div class="form-row">
+                    <button type="submit" class="contact-btn waitlist-btn">Join waitlist</button>
+                </div>
+
+                <p class="waitlist-note">No spam. One email when we launch.</p>
+            </form>
+
+            <div class="waitlist-success" id="waitlistSuccess" aria-live="polite">
+                <div class="waitlist-success-icon" aria-hidden="true"></div>
+                <h2>You're on the list.</h2>
+                <p>We'll reach out when early access opens.</p>
+                <a href="index.html" class="btn-secondary waitlist-success-back">← Back to home</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="waitlist-footer">
+        <p>© 2026 Stayora. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    (function () {
+        var form    = document.getElementById('waitlistForm');
+        var success = document.getElementById('waitlistSuccess');
+        if (!form || !success) return;
+
+        var statusEl = document.createElement('p');
+        statusEl.className = 'waitlist-status';
+        statusEl.setAttribute('aria-live', 'polite');
+        form.appendChild(statusEl);
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            var data         = new FormData(form);
+            var name         = String(data.get('name')         || '').trim();
+            var email        = String(data.get('email')        || '').trim();
+            var propertyType = String(data.get('propertyType') || '').trim();
+            var rooms        = String(data.get('rooms')        || '').trim();
+
+            if (!name || !email) {
+                statusEl.textContent = 'Please fill in your name and email.';
+                return;
+            }
+
+            if (data.get('website')) return; // honeypot
+
+            var payload = {
+                inquiryType:  'Waitlist',
+                name:         name,
+                email:        email,
+                message:      'Waitlist signup',
+                propertyType: propertyType || '',
+                rooms:        rooms || ''
+            };
+
+            var btn = form.querySelector('button[type="submit"]');
+            if (btn) btn.disabled = true;
+            statusEl.textContent = 'Submitting...';
+
+            if (window.location.protocol === 'file:') {
+                statusEl.textContent = 'Push to GitHub to test — forms blocked by browser on local files.';
+                if (btn) btn.disabled = false;
+                return;
+            }
+
+            try {
+                var qs = new URLSearchParams({
+                    inquiryType:  payload.inquiryType,
+                    name:         payload.name,
+                    email:        payload.email,
+                    message:      payload.message,
+                    propertyType: payload.propertyType,
+                    rooms:        payload.rooms
+                });
+                await fetch(FORM_ENDPOINT + '?' + qs.toString(), { mode: 'no-cors' });
+                form.classList.add('is-hidden');
+                success.classList.add('is-visible');
+                var hero = document.querySelector('.waitlist-hero');
+                if (hero) hero.classList.add('is-hidden');
+            } catch (err) {
+                statusEl.textContent = 'Something went wrong. Please try again.';
+                if (btn) btn.disabled = false;
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

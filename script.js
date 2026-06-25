@@ -1,4 +1,5 @@
 
+var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxaCJ7AXcG6klC7lahkyCC8JREDBZEZgrbhH-9w9xulPxTeKGnS0iYR8SySlbepFxxR/exec';
 
 (function () {
   function initLoad() {
@@ -389,9 +390,9 @@
       var data = new FormData(form);
       var payload = {
         inquiryType: String(data.get('inquiryType') || 'General contact').trim(),
-        name: String(data.get('name') || '').trim(),
-        email: String(data.get('email') || '').trim(),
-        message: String(data.get('message') || '').trim()
+        name:        String(data.get('name')        || '').trim(),
+        email:       String(data.get('email')       || '').trim(),
+        message:     String(data.get('message')     || '').trim()
       };
 
       if (!payload.name || !payload.email || !payload.message) {
@@ -399,39 +400,23 @@
         return;
       }
 
-      if (window.location.protocol === 'file:') {
-        var mailtoSubject = encodeURIComponent('[' + payload.inquiryType + '] New message from ' + payload.name);
-        var mailtoBody = encodeURIComponent(
-          'Inquiry: ' + payload.inquiryType + '\n' +
-          'Name: ' + payload.name + '\n' +
-          'Email: ' + payload.email + '\n\n' +
-          payload.message
-        );
-        statusEl.innerHTML =
-          'Local file preview cannot call /api/contact. ' +
-          '<a href="mailto:simone.marton89@gmail.com?subject=' + mailtoSubject + '&body=' + mailtoBody + '">Send via email app</a> ' +
-          'or run the site on http/https.';
-        return;
-      }
+      if (data.get('website')) return; // honeypot
 
       if (submitButton) submitButton.disabled = true;
       statusEl.textContent = 'Sending...';
 
       try {
-        var response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+        var qs = new URLSearchParams({
+          inquiryType: payload.inquiryType,
+          name:        payload.name,
+          email:       payload.email,
+          message:     payload.message
         });
-
-        if (!response.ok) {
-          throw new Error('Request failed with status ' + response.status);
-        }
-
+        await fetch(FORM_ENDPOINT + '?' + qs.toString(), { mode: 'no-cors' });
         form.reset();
-        statusEl.textContent = 'Message sent. We will get back to you soon.';
-      } catch (error) {
-        statusEl.textContent = 'Could not send message. Please try again later.';
+        statusEl.textContent = 'Message sent. We\'ll get back to you soon.';
+      } catch (err) {
+        statusEl.textContent = 'Could not send message. Please try again.';
       } finally {
         if (submitButton) submitButton.disabled = false;
       }
