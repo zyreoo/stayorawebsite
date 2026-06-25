@@ -406,20 +406,20 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
       statusEl.textContent = 'Sending...';
 
       try {
+        var formData = new FormData();
+        formData.append('access_key', WEB3FORMS_KEY);
+        formData.append('subject',    '[' + payload.inquiryType + '] ' + payload.name);
+        formData.append('from_name',  'Stayora Contact');
+        formData.append('name',       payload.name);
+        formData.append('email',      payload.email);
+        formData.append('message',    payload.message);
+
         var res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            subject:    '[' + payload.inquiryType + '] ' + payload.name,
-            from_name:  'Stayora Contact',
-            name:       payload.name,
-            email:      payload.email,
-            message:    payload.message
-          })
+          body: formData
         });
         var result = await res.json();
-        if (result.result !== 'success') throw new Error(result.message);
+        if (!res.ok) throw new Error(result.message);
         form.reset();
         statusEl.textContent = 'Message sent. We\'ll get back to you soon.';
       } catch (err) {

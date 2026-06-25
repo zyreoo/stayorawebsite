@@ -134,20 +134,20 @@
                 if (propertyType) details += '\nProperty type: ' + propertyType;
                 if (rooms) details += '\nRooms: ' + rooms;
 
+                var formData = new FormData();
+                formData.append('access_key', '743c4f58-3eff-4f2c-b148-34009b2b40f5');
+                formData.append('subject', '[Waitlist] ' + name);
+                formData.append('from_name', 'Stayora Waitlist');
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('message', details);
+
                 var res = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({
-                        access_key: '743c4f58-3eff-4f2c-b148-34009b2b40f5',
-                        subject: '[Waitlist] ' + name,
-                        from_name: 'Stayora Waitlist',
-                        name: name,
-                        email: email,
-                        message: details
-                    })
+                    body: formData
                 });
                 var result = await res.json();
-                if (result.result !== 'success') throw new Error(result.message);
+                if (!res.ok) throw new Error(result.message);
 
                 form.classList.add('is-hidden');
                 success.classList.add('is-visible');
