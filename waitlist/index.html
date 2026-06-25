@@ -125,35 +125,30 @@
 
             if (data.get('website')) return; // honeypot
 
-            var payload = {
-                inquiryType:  'Waitlist',
-                name:         name,
-                email:        email,
-                message:      'Waitlist signup',
-                propertyType: propertyType || '',
-                rooms:        rooms || ''
-            };
-
             var btn = form.querySelector('button[type="submit"]');
             if (btn) btn.disabled = true;
             statusEl.textContent = 'Submitting...';
 
-            if (window.location.protocol === 'file:') {
-                statusEl.textContent = 'Push to GitHub to test — forms blocked by browser on local files.';
-                if (btn) btn.disabled = false;
-                return;
-            }
-
             try {
-                var qs = new URLSearchParams({
-                    inquiryType:  payload.inquiryType,
-                    name:         payload.name,
-                    email:        payload.email,
-                    message:      payload.message,
-                    propertyType: payload.propertyType,
-                    rooms:        payload.rooms
+                var details = 'Waitlist signup';
+                if (propertyType) details += '\nProperty type: ' + propertyType;
+                if (rooms) details += '\nRooms: ' + rooms;
+
+                var res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        access_key: '743c4f58-3eff-4f2c-b148-34009b2b40f5',
+                        subject: '[Waitlist] ' + name,
+                        from_name: 'Stayora Waitlist',
+                        name: name,
+                        email: email,
+                        message: details
+                    })
                 });
-                await fetch(FORM_ENDPOINT + '?' + qs.toString(), { mode: 'no-cors' });
+                var result = await res.json();
+                if (result.result !== 'success') throw new Error(result.message);
+
                 form.classList.add('is-hidden');
                 success.classList.add('is-visible');
                 var hero = document.querySelector('.waitlist-hero');

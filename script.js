@@ -1,5 +1,5 @@
 
-var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxaCJ7AXcG6klC7lahkyCC8JREDBZEZgrbhH-9w9xulPxTeKGnS0iYR8SySlbepFxxR/exec';
+var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
 
 (function () {
   function initLoad() {
@@ -406,13 +406,20 @@ var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxaCJ7AXcG6klC7lahk
       statusEl.textContent = 'Sending...';
 
       try {
-        var qs = new URLSearchParams({
-          inquiryType: payload.inquiryType,
-          name:        payload.name,
-          email:       payload.email,
-          message:     payload.message
+        var res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject:    '[' + payload.inquiryType + '] ' + payload.name,
+            from_name:  'Stayora Contact',
+            name:       payload.name,
+            email:      payload.email,
+            message:    payload.message
+          })
         });
-        await fetch(FORM_ENDPOINT + '?' + qs.toString(), { mode: 'no-cors' });
+        var result = await res.json();
+        if (result.result !== 'success') throw new Error(result.message);
         form.reset();
         statusEl.textContent = 'Message sent. We\'ll get back to you soon.';
       } catch (err) {
