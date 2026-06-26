@@ -868,6 +868,25 @@ button {
     color: rgba(56, 56, 56, 0.5);
 }
 
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(56, 56, 56, 0.75);
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.footer-social-link:hover {
+    color: var(--color-primary);
+}
+
+.footer-social-link svg {
+    flex-shrink: 0;
+}
+
 /* ── Waitlist page ───────────────────────────────────── */
 .waitlist-page {
     display: flex;
