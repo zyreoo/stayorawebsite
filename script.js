@@ -109,6 +109,7 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
   
     if (!grid || !layer) return;
   
+    var isRo = document.documentElement.lang === 'ro';
     var BAR_OFFSET_X = 8;
     var BAR_OFFSET_Y = 6;
   
@@ -148,7 +149,7 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
     }
   
     function formatDay(date) {
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleDateString(isRo ? 'ro-RO' : 'en-US', {
         weekday: 'short',
         month: 'short',
         day: 'numeric'
@@ -167,7 +168,7 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
       rooms.forEach(function (room) {
         var roomHead = document.createElement('div');
         roomHead.className = 'calendar-cell header';
-        roomHead.textContent = 'Room ' + room;
+        roomHead.textContent = (isRo ? 'Camera ' : 'Room ') + room;
         grid.appendChild(roomHead);
       });
   
@@ -226,7 +227,7 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
   
         bar.innerHTML =
           '<span class=\"booking-guest\">' + booking.guest + '</span>' +
-          '<span class=\"booking-meta\">' + booking.nights + ' night' + (booking.nights > 1 ? 's' : '') + '</span>';
+          '<span class=\"booking-meta\">' + booking.nights + (isRo ? (booking.nights > 1 ? ' nopți' : ' noapte') : (booking.nights > 1 ? ' nights' : ' night')) + '</span>';
   
           bar.addEventListener('dragstart', function (e) {
             dragBookingId = booking.id;
@@ -368,6 +369,7 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
     var form = document.querySelector('.contact-form');
     if (!form) return;
 
+    var isRo = document.documentElement.lang === 'ro';
     var submitButton = form.querySelector('button[type="submit"]');
     var inquiryInput = form.querySelector('input[name="inquiryType"]');
     var inquiryLinks = document.querySelectorAll('a[href="#contact"][data-inquiry]');
@@ -396,14 +398,14 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
       };
 
       if (!payload.name || !payload.email || !payload.message) {
-        statusEl.textContent = 'Please complete all fields.';
+        statusEl.textContent = (isRo ? 'Te rugăm să completezi toate câmpurile.' : 'Please complete all fields.');
         return;
       }
 
       if (data.get('website')) return; // honeypot
 
       if (submitButton) submitButton.disabled = true;
-      statusEl.textContent = 'Sending...';
+      statusEl.textContent = (isRo ? 'Se trimite...' : 'Sending...');
 
       try {
         var formData = new FormData();
@@ -421,9 +423,9 @@ var WEB3FORMS_KEY = '743c4f58-3eff-4f2c-b148-34009b2b40f5';
         var result = await res.json();
         if (!res.ok) throw new Error(result.message);
         form.reset();
-        statusEl.textContent = 'Message sent. We\'ll get back to you soon.';
+        statusEl.textContent = (isRo ? 'Mesaj trimis. Îți răspundem în curând.' : 'Message sent. We\'ll get back to you soon.');
       } catch (err) {
-        statusEl.textContent = 'Could not send message. Please try again.';
+        statusEl.textContent = (isRo ? 'Mesajul nu a putut fi trimis. Încearcă din nou.' : 'Could not send message. Please try again.');
       } finally {
         if (submitButton) submitButton.disabled = false;
       }

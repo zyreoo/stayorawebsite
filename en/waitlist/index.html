@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request access – Stayora, free during the pilot</title>
+    <meta name="description" content="Request access to Stayora, hotel management software for small hotels and guesthouses. Free during the pilot. We approve each hotel personally.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0147FF">
+    <link rel="canonical" href="https://www.stayora.ro/en/waitlist/">
+    <link rel="alternate" hreflang="ro" href="https://www.stayora.ro/waitlist/">
+    <link rel="alternate" hreflang="en" href="https://www.stayora.ro/en/waitlist/">
+    <link rel="alternate" hreflang="x-default" href="https://www.stayora.ro/waitlist/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.stayora.ro/en/waitlist/">
+    <meta property="og:site_name" content="Stayora">
+    <meta property="og:title" content="Request access – Stayora, free during the pilot">
+    <meta property="og:description" content="Hotel management for small hotels and guesthouses. Free during the pilot.">
+    <meta property="og:image" content="https://www.stayora.ro/public/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/public/iconWebPhoto.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+</head>
+<body class="load-wrap waitlist-page">
+
+    <div class="header-sticky">
+    <header class="header load-reveal">
+        <a href="/en/" class="logo logo-home" aria-label="Stayora – home">
+            <img src="/public/logo.svg" alt="Stayora" width="120" height="28">
+        </a>
+        <nav class="nav" id="main-nav" aria-label="Main navigation">
+            <div class="nav-links">
+                <a href="/en/#features" class="nav-link">Features</a>
+                <a href="/en/#howItWorks" class="nav-link">How it works</a>
+                <a href="/en/#download" class="nav-link">Download</a>
+                <a href="/en/faq/" class="nav-link">FAQ</a>
+                <a href="/en/#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="/waitlist/" class="lang-switch" hreflang="ro" lang="ro" aria-label="Versiunea în română">RO</a>
+            <a href="https://app.stayora.ro" class="btn-primary btn-header">Open the web app</a>
+        </nav>
+    </header>
+    </div>
+
+    <main>
+        <section class="waitlist-hero load-reveal">
+            <div class="waitlist-hero-top">
+                <a href="/en/" class="waitlist-back">← Home</a>
+                <span class="page-hero-kicker">Free during the pilot</span>
+            </div>
+            <h1>Request access.</h1>
+            <p>We approve each hotel personally and email you, usually the same day.</p>
+        </section>
+
+        <div class="waitlist-form-section">
+
+            <form class="waitlist-form-card" id="waitlistForm" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+
+                <div class="form-row form-row-split">
+                    <input class="contact-input" type="text" name="name" placeholder="Your name" aria-label="Your name" required autocomplete="name">
+                    <input class="contact-input" type="email" name="email" placeholder="Your email" aria-label="Your email" required autocomplete="email">
+                </div>
+
+                <div class="form-row form-row-split">
+                    <input class="contact-input" type="text" name="hotel" placeholder="Hotel name" aria-label="Hotel name" required autocomplete="organization">
+                    <input class="contact-input" type="number" name="rooms" placeholder="Number of rooms" aria-label="Number of rooms" min="1" max="9999" inputmode="numeric">
+                </div>
+
+                <div class="form-row form-row-split">
+                    <select class="contact-input contact-select" name="propertyType" aria-label="Type of property">
+                        <option value="" disabled selected>Type of property</option>
+                        <option value="Guesthouse">Guesthouse</option>
+                        <option value="Small hotel">Small hotel</option>
+                        <option value="Boutique hotel">Boutique hotel</option>
+                        <option value="Apartments">Apartments</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input class="contact-input" type="text" name="city" placeholder="City" aria-label="City" autocomplete="address-level2">
+                </div>
+
+                <div class="form-row">
+                    <button type="submit" class="contact-btn waitlist-btn">Request access – free during the pilot</button>
+                </div>
+
+                <p class="waitlist-note">We only use your details to reply to you. See our <a href="/en/privacy/">privacy policy</a>.</p>
+            </form>
+
+            <div class="waitlist-success" id="waitlistSuccess" aria-live="polite">
+                <div class="waitlist-success-icon" aria-hidden="true"></div>
+                <h2>Request received.</h2>
+                <p>We’ll email you once your hotel is approved.</p>
+                <a href="/en/" class="btn-secondary waitlist-success-back">← Back to home</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="waitlist-footer">
+        <p>© 2026 Stayora · <a href="/en/privacy/">Privacy</a> · <a href="/en/terms/">Terms</a></p>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+    (function () {
+        var form    = document.getElementById('waitlistForm');
+        var success = document.getElementById('waitlistSuccess');
+        if (!form || !success) return;
+
+        var isRo = document.documentElement.lang === 'ro';
+        var statusEl = document.createElement('p');
+        statusEl.className = 'waitlist-status';
+        statusEl.setAttribute('aria-live', 'polite');
+        form.appendChild(statusEl);
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            var data         = new FormData(form);
+            var name         = String(data.get('name')         || '').trim();
+            var email        = String(data.get('email')        || '').trim();
+            var hotel        = String(data.get('hotel')        || '').trim();
+            var propertyType = String(data.get('propertyType') || '').trim();
+            var rooms        = String(data.get('rooms')        || '').trim();
+            var city         = String(data.get('city')         || '').trim();
+
+            if (!name || !email || !hotel) {
+                statusEl.textContent = isRo
+                    ? 'Completează numele, emailul și numele hotelului.'
+                    : 'Please fill in your name, email and hotel name.';
+                return;
+            }
+
+            if (data.get('website')) return; // honeypot
+
+            var btn = form.querySelector('button[type="submit"]');
+            if (btn) btn.disabled = true;
+            statusEl.textContent = isRo ? 'Se trimite...' : 'Submitting...';
+
+            try {
+                var details = 'Access request (' + (isRo ? 'RO' : 'EN') + ')';
+                details += '\nHotel: ' + hotel;
+                if (propertyType) details += '\nProperty type: ' + propertyType;
+                if (rooms) details += '\nRooms: ' + rooms;
+                if (city) details += '\nCity: ' + city;
+
+                var formData = new FormData();
+                formData.append('access_key', WEB3FORMS_KEY);
+                formData.append('subject', '[Request access] ' + hotel + ' – ' + name);
+                formData.append('from_name', 'Stayora Access Requests');
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('message', details);
+
+                var res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                var result = await res.json();
+                if (!res.ok) throw new Error(result.message);
+
+                form.classList.add('is-hidden');
+                success.classList.add('is-visible');
+                var hero = document.querySelector('.waitlist-hero');
+                if (hero) hero.classList.add('is-hidden');
+            } catch (err) {
+                statusEl.textContent = isRo
+                    ? 'Ceva n-a mers. Încearcă din nou.'
+                    : 'Something went wrong. Please try again.';
+                if (btn) btn.disabled = false;
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
