@@ -1,0 +1,12 @@
+# Keep secrets and repo files out of the Cloudflare assets upload
+.env*
+.dev.vars*
+.git
+.github
+.claude
+.wrangler
+.DS_Store
+node_modules
+functions
+wrangler.jsonc
+README.md
